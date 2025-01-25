@@ -42,10 +42,10 @@
 ##     The name of the file to produce the full path of.
 ##
 fullpath() {
-    FILENAME="$1"
-    DIR=`dirname "$FILENAME"`
-    FILE=`basename "$FILENAME"`
-    (cd "$DIR" && echo "$PWD/$FILE")
+	FILENAME="$1"
+	DIR=$(dirname "$FILENAME")
+	FILE=$(basename "$FILENAME")
+	(cd "$DIR" && echo "$PWD/$FILE")
 }
 
 ##
@@ -55,8 +55,8 @@ fullpath() {
 ##     The full path of the file to download.
 ##
 send_download_file() {
-    FILENAME="$1"
-    printf "\033]482200;%s\007" "$FILENAME"
+	FILENAME="$1"
+	printf "\033]482200;%s\007" "$FILENAME"
 }
 
 ##
@@ -66,8 +66,8 @@ send_download_file() {
 ##     The full path to the directory which should receive uploads.
 ##
 send_set_directory() {
-    FILENAME="$1"
-    printf "\033]482201;%s\007" "$FILENAME"
+	FILENAME="$1"
+	printf "\033]482201;%s\007" "$FILENAME"
 }
 
 ##
@@ -78,8 +78,8 @@ send_set_directory() {
 ##     The name of the pipe stream to open.
 ##
 send_open_pipe_stream() {
-    NAME="$1"
-    printf "\033]482202;%s\007" "$NAME"
+	NAME="$1"
+	printf "\033]482202;%s\007" "$NAME"
 }
 
 ##
@@ -87,7 +87,7 @@ send_open_pipe_stream() {
 ## terminal emulator
 ##
 send_close_pipe_stream() {
-    printf "\033]482203;\007"
+	printf "\033]482203;\007"
 }
 
 ##
@@ -98,8 +98,8 @@ send_close_pipe_stream() {
 ##     The number of rows that the scrollback buffer should contain.
 ##
 send_resize_scrollback() {
-    ROWS="$1"
-    printf "\033]482204;%s\007" "$ROWS"
+	ROWS="$1"
+	printf "\033]482204;%s\007" "$ROWS"
 }
 
 ##
@@ -109,14 +109,14 @@ send_resize_scrollback() {
 ##     The text to print as an error message.
 ##
 error() {
-    echo "$NAME:" "$@" >&2
+	echo "$NAME:" "$@" >&2
 }
 
 ##
 ## Prints usage documentation for this script.
 ##
 usage() {
-    cat >&2 <<END
+	cat >&2 <<END
 guacctl 1.5.3, Apache Guacamole terminal session control utility.
 Usage: guacctl [OPTION] [FILE or NAME]...
 
@@ -141,26 +141,26 @@ END
 ##
 download_files() {
 
-    #
-    # Validate arguments
-    #
+	#
+	# Validate arguments
+	#
 
-    if [ $# -lt 1 ]; then
-        error "No files specified."
-        return;
-    fi
+	if [ $# -lt 1 ]; then
+		error "No files specified."
+		return
+	fi
 
-    #
-    # Send download code for each file given
-    #
+	#
+	# Send download code for each file given
+	#
 
-    for FILENAME in "$@"; do
-        if [ -e "$FILENAME" ]; then
-            send_download_file "`fullpath "$FILENAME"`"
-        else
-            error "$FILENAME: File does not exist."
-        fi
-    done
+	for FILENAME in "$@"; do
+		if [ -e "$FILENAME" ]; then
+			send_download_file "$(fullpath "$FILENAME")"
+		else
+			error "$FILENAME: File does not exist."
+		fi
+	done
 
 }
 
@@ -172,30 +172,30 @@ download_files() {
 ##
 set_directory() {
 
-    #
-    # Validate arguments
-    #
+	#
+	# Validate arguments
+	#
 
-    if [ $# -lt 1 ]; then
-        error "No destination directory specified."
-        return;
-    fi
+	if [ $# -lt 1 ]; then
+		error "No destination directory specified."
+		return
+	fi
 
-    if [ $# -gt 1 ]; then
-        error "Only one destination directory may be given."
-        return;
-    fi
+	if [ $# -gt 1 ]; then
+		error "Only one destination directory may be given."
+		return
+	fi
 
-    #
-    # Send code for setting the upload directory
-    #
+	#
+	# Send code for setting the upload directory
+	#
 
-    FILENAME="$1"
-    if [ -d "$FILENAME" ]; then
-        send_set_directory "`fullpath "$FILENAME"`"
-    else
-        error "$FILENAME: File does not exist or is not a directory."
-    fi
+	FILENAME="$1"
+	if [ -d "$FILENAME" ]; then
+		send_set_directory "$(fullpath "$FILENAME")"
+	else
+		error "$FILENAME: File does not exist or is not a directory."
+	fi
 
 }
 
@@ -208,26 +208,26 @@ set_directory() {
 ##
 open_pipe_stream() {
 
-    #
-    # Validate arguments
-    #
+	#
+	# Validate arguments
+	#
 
-    if [ $# -lt 1 ]; then
-        error "No pipe name specified."
-        return;
-    fi
+	if [ $# -lt 1 ]; then
+		error "No pipe name specified."
+		return
+	fi
 
-    if [ $# -gt 1 ]; then
-        error "Only one pipe name may be given."
-        return;
-    fi
+	if [ $# -gt 1 ]; then
+		error "Only one pipe name may be given."
+		return
+	fi
 
-    #
-    # Send code for opening the named pipe stream
-    #
+	#
+	# Send code for opening the named pipe stream
+	#
 
-    NAME="$1"
-    send_open_pipe_stream "$NAME"
+	NAME="$1"
+	send_open_pipe_stream "$NAME"
 
 }
 
@@ -240,20 +240,20 @@ open_pipe_stream() {
 ##
 close_pipe_stream() {
 
-    #
-    # Validate arguments
-    #
+	#
+	# Validate arguments
+	#
 
-    if [ $# -gt 0 ]; then
-        error "Closing an open pipe stream does not require any arguments."
-        return;
-    fi
+	if [ $# -gt 0 ]; then
+		error "Closing an open pipe stream does not require any arguments."
+		return
+	fi
 
-    #
-    # Send code for closing the currently-open named pipe stream
-    #
+	#
+	# Send code for closing the currently-open named pipe stream
+	#
 
-    send_close_pipe_stream
+	send_close_pipe_stream
 
 }
 
@@ -266,43 +266,42 @@ close_pipe_stream() {
 ##
 resize_scrollback() {
 
-    #
-    # Validate arguments
-    #
+	#
+	# Validate arguments
+	#
 
-    if [ $# -lt 1 ]; then
-        error "No row count specified."
-        return;
-    fi
+	if [ $# -lt 1 ]; then
+		error "No row count specified."
+		return
+	fi
 
-    if [ $# -gt 1 ]; then
-        error "Only one row count may be given."
-        return;
-    fi
+	if [ $# -gt 1 ]; then
+		error "Only one row count may be given."
+		return
+	fi
 
-    #
-    # Send code for resizing scrollback
-    #
+	#
+	# Send code for resizing scrollback
+	#
 
-    ROWS="$1"
-    send_resize_scrollback "$ROWS"
+	ROWS="$1"
+	send_resize_scrollback "$ROWS"
 
 }
-
 
 #
 # Get script name
 #
 
-NAME=`basename "$0"`
+NAME=$(basename "$0")
 
 #
 # Handle downloads directly if invoked as "guacget"
 #
 
 if [ "x$NAME" = "xguacget" ]; then
-    download_files "$@"
-    exit 0;
+	download_files "$@"
+	exit 0
 fi
 
 #
@@ -311,58 +310,57 @@ fi
 
 case "$1" in
 
-    #
-    # Download files
-    #
+#
+# Download files
+#
 
-    "--download"|"-d")
-        shift
-        download_files "$@"
-        ;;
+"--download" | "-d")
+	shift
+	download_files "$@"
+	;;
 
-    #
-    # Set upload directory
-    #
+#
+# Set upload directory
+#
 
-    "--set-directory"|"-s")
-        shift
-        set_directory "$@"
-        ;;
+"--set-directory" | "-s")
+	shift
+	set_directory "$@"
+	;;
 
-    #
-    # Redirect to pipe
-    #
+#
+# Redirect to pipe
+#
 
-    "--open-pipe"|"-o")
-        shift
-        open_pipe_stream "$@"
-        ;;
+"--open-pipe" | "-o")
+	shift
+	open_pipe_stream "$@"
+	;;
 
-    #
-    # Redirect back to terminal
-    #
+#
+# Redirect back to terminal
+#
 
-    "--close-pipe"|"-c")
-        shift
-        close_pipe_stream "$@"
-        ;;
+"--close-pipe" | "-c")
+	shift
+	close_pipe_stream "$@"
+	;;
 
-    #
-    # Resize scrollback
-    #
+#
+# Resize scrollback
+#
 
-    "--scrollback"|"-S")
-        shift
-        resize_scrollback "$@"
-        ;;
+"--scrollback" | "-S")
+	shift
+	resize_scrollback "$@"
+	;;
 
-    #
-    # Show usage info if options are invalid
-    #
+#
+# Show usage info if options are invalid
+#
 
-    *)
-        usage
-        exit 1
-        ;;
+*)
+	usage
+	exit 1
+	;;
 esac
-

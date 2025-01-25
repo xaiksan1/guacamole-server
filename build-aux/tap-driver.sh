@@ -23,7 +23,7 @@
 # bugs to <bug-automake@gnu.org> or send patches to
 # <automake-patches@gnu.org>.
 
-scriptversion=2013-12-23.17; # UTC
+scriptversion=2013-12-23.17 # UTC
 
 # Make unconditional expansion of undefined variables an error.  This
 # helps a lot in preventing typo-related bugs.
@@ -31,22 +31,19 @@ set -u
 
 me=tap-driver.sh
 
-fatal ()
-{
-  echo "$me: fatal: $*" >&2
-  exit 1
+fatal() {
+	echo "$me: fatal: $*" >&2
+	exit 1
 }
 
-usage_error ()
-{
-  echo "$me: $*" >&2
-  print_usage >&2
-  exit 2
+usage_error() {
+	echo "$me: $*" >&2
+	print_usage >&2
+	exit 2
 }
 
-print_usage ()
-{
-  cat <<END
+print_usage() {
+	cat <<END
 Usage:
   tap-driver.sh --test-name=NAME --log-file=PATH --trs-file=PATH
                 [--expect-failure={yes|no}] [--color-tests={yes|no}]
@@ -69,36 +66,63 @@ ignore_exit=0
 comments=0
 diag_string='#'
 while test $# -gt 0; do
-  case $1 in
-  --help) print_usage; exit $?;;
-  --version) echo "$me $scriptversion"; exit $?;;
-  --test-name) test_name=$2; shift;;
-  --log-file) log_file=$2; shift;;
-  --trs-file) trs_file=$2; shift;;
-  --color-tests) color_tests=$2; shift;;
-  --expect-failure) expect_failure=$2; shift;;
-  --enable-hard-errors) shift;; # No-op.
-  --merge) merge=1;;
-  --no-merge) merge=0;;
-  --ignore-exit) ignore_exit=1;;
-  --comments) comments=1;;
-  --no-comments) comments=0;;
-  --diagnostic-string) diag_string=$2; shift;;
-  --) shift; break;;
-  -*) usage_error "invalid option: '$1'";;
-  esac
-  shift
+	case $1 in
+	--help)
+		print_usage
+		exit $?
+		;;
+	--version)
+		echo "$me $scriptversion"
+		exit $?
+		;;
+	--test-name)
+		test_name=$2
+		shift
+		;;
+	--log-file)
+		log_file=$2
+		shift
+		;;
+	--trs-file)
+		trs_file=$2
+		shift
+		;;
+	--color-tests)
+		color_tests=$2
+		shift
+		;;
+	--expect-failure)
+		expect_failure=$2
+		shift
+		;;
+	--enable-hard-errors) shift ;; # No-op.
+	--merge) merge=1 ;;
+	--no-merge) merge=0 ;;
+	--ignore-exit) ignore_exit=1 ;;
+	--comments) comments=1 ;;
+	--no-comments) comments=0 ;;
+	--diagnostic-string)
+		diag_string=$2
+		shift
+		;;
+	--)
+		shift
+		break
+		;;
+	-*) usage_error "invalid option: '$1'" ;;
+	esac
+	shift
 done
 
 test $# -gt 0 || usage_error "missing test command"
 
 case $expect_failure in
-  yes) expect_failure=1;;
-    *) expect_failure=0;;
+yes) expect_failure=1 ;;
+*) expect_failure=0 ;;
 esac
 
 if test $color_tests = yes; then
-  init_colors='
+	init_colors='
     color_map["red"]="[0;31m" # Red.
     color_map["grn"]="[0;32m" # Green.
     color_map["lgn"]="[1;32m" # Light green.
@@ -112,47 +136,48 @@ if test $color_tests = yes; then
     color_for_result["XFAIL"] = "lgn"
     color_for_result["SKIP"]  = "blu"'
 else
-  init_colors=''
+	init_colors=''
 fi
 
 # :; is there to work around a bug in bash 3.2 (and earlier) which
 # does not always set '$?' properly on redirection failure.
 # See the Autoconf manual for more details.
-:;{
-  (
-    # Ignore common signals (in this subshell only!), to avoid potential
-    # problems with Korn shells.  Some Korn shells are known to propagate
-    # to themselves signals that have killed a child process they were
-    # waiting for; this is done at least for SIGINT (and usually only for
-    # it, in truth).  Without the `trap' below, such a behaviour could
-    # cause a premature exit in the current subshell, e.g., in case the
-    # test command it runs gets terminated by a SIGINT.  Thus, the awk
-    # script we are piping into would never seen the exit status it
-    # expects on its last input line (which is displayed below by the
-    # last `echo $?' statement), and would thus die reporting an internal
-    # error.
-    # For more information, see the Autoconf manual and the threads:
-    # <https://lists.gnu.org/archive/html/bug-autoconf/2011-09/msg00004.html>
-    # <http://mail.opensolaris.org/pipermail/ksh93-integration-discuss/2009-February/004121.html>
-    trap : 1 3 2 13 15
-    if test $merge -gt 0; then
-      exec 2>&1
-    else
-      exec 2>&3
-    fi
-    "$@"
-    echo $?
-  ) | LC_ALL=C ${AM_TAP_AWK-awk} \
-        -v me="$me" \
-        -v test_script_name="$test_name" \
-        -v log_file="$log_file" \
-        -v trs_file="$trs_file" \
-        -v expect_failure="$expect_failure" \
-        -v merge="$merge" \
-        -v ignore_exit="$ignore_exit" \
-        -v comments="$comments" \
-        -v diag_string="$diag_string" \
-'
+:
+{
+	(
+		# Ignore common signals (in this subshell only!), to avoid potential
+		# problems with Korn shells.  Some Korn shells are known to propagate
+		# to themselves signals that have killed a child process they were
+		# waiting for; this is done at least for SIGINT (and usually only for
+		# it, in truth).  Without the `trap' below, such a behaviour could
+		# cause a premature exit in the current subshell, e.g., in case the
+		# test command it runs gets terminated by a SIGINT.  Thus, the awk
+		# script we are piping into would never seen the exit status it
+		# expects on its last input line (which is displayed below by the
+		# last `echo $?' statement), and would thus die reporting an internal
+		# error.
+		# For more information, see the Autoconf manual and the threads:
+		# <https://lists.gnu.org/archive/html/bug-autoconf/2011-09/msg00004.html>
+		# <http://mail.opensolaris.org/pipermail/ksh93-integration-discuss/2009-February/004121.html>
+		trap : 1 3 2 13 15
+		if test $merge -gt 0; then
+			exec 2>&1
+		else
+			exec 2>&3
+		fi
+		"$@"
+		echo $?
+	) | LC_ALL=C ${AM_TAP_AWK-awk} \
+		-v me="$me" \
+		-v test_script_name="$test_name" \
+		-v log_file="$log_file" \
+		-v trs_file="$trs_file" \
+		-v expect_failure="$expect_failure" \
+		-v merge="$merge" \
+		-v ignore_exit="$ignore_exit" \
+		-v comments="$comments" \
+		-v diag_string="$diag_string" \
+		'
 # TODO: the usages of "cat >&3" below could be optimized when using
 #       GNU awk, and/on on systems that supports /dev/fd/.
 
@@ -635,7 +660,7 @@ exit 0
 } # End of "BEGIN" block.
 '
 
-# TODO: document that we consume the file descriptor 3 :-(
+	# TODO: document that we consume the file descriptor 3 :-(
 } 3>"$log_file"
 
 test $? -eq 0 || fatal "I/O or internal error"

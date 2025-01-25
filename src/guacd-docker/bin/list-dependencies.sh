@@ -31,21 +31,20 @@
 
 while [ -n "$1" ]; do
 
-    # For all non-Guacamole library dependencies
-    ldd "$1" | grep -v 'libguac' | awk '/=>/{print $(NF-1)}' \
-        | while read LIBRARY; do
+	# For all non-Guacamole library dependencies
+	ldd "$1" | grep -v 'libguac' | awk '/=>/{print $(NF-1)}' |
+		while read LIBRARY; do
 
-        # List the package providing that library, if any
-        apk info -W "$LIBRARY" 2> /dev/null \
-            | grep 'is owned by' | grep -o '[^ ]*$' || true
+			# List the package providing that library, if any
+			apk info -W "$LIBRARY" 2>/dev/null |
+				grep 'is owned by' | grep -o '[^ ]*$' || true
 
-    done
+		done
 
-    # Next binary
-    shift
+	# Next binary
+	shift
 
-# Strip the "-VERSION" suffix from each package name, listing each resulting
-# package uniquely ("apk add" cannot handle package names that include the
-# version number)
+	# Strip the "-VERSION" suffix from each package name, listing each resulting
+	# package uniquely ("apk add" cannot handle package names that include the
+	# version number)
 done | sed 's/\(.*\)-[0-9]\+\..*$/\1/' | sort -u
-
