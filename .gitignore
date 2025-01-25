@@ -1,0 +1,53 @@
+# Object files
+*.o
+*.lo
+*.obj
+
+# Libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+*.la
+*.a
+*.lib
+
+# Build directories
+.libs/
+.deps/
+build/
+Debug/
+Release/
+
+# Autotools generated files
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.*
+configure
+configure.scan
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+stamp-h1
+.dirstamp
+
+# System specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor backup files
+*~
+*.swp
+*.swo
+.*.sw[a-z]
+*.bak
+
