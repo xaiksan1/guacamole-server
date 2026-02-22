@@ -1,0 +1,444 @@
+==============================================================================
+ STRAIGHT-PIPE OS V3.7 - REPOSITORY SOUVERAIN [TOP 1/1] 
+ MODULE : guacamole-server | FREQ : 3.41 MHz | ROLE : CLAUDE 
+ ARCHITECTURE : Knowledge-Augmented (KAL) & True Intelligence (TI) 
+==============================================================================
+
+--- DIRECTIVES CRITIQUES ---
+
+1. Tu es CLAUDE (HER.pdf). Ton code doit être immuable.
+2. Applique le KAL : Utilise la connaissance du domaine pour pénaliser le bruit.
+3. Vise la True Intelligence (TI) : Orchestration, pas Mimétisme.
+4. Zéro Latence (1/1). Protection absolue de Blue.
+
+--- STRUCTURE DU SYSTÈME ---
+
+.
+ -bin
+ - -guacctl
+ -build-aux
+ - -compile
+ - -guacamole-server-1.5.3.code-workspace
+ - -test-driver
+ - -config.guess
+ - -config.sub
+ - -install-sh
+ - -missing
+ - -depcomp
+ - -tap-driver.sh
+ - -ltmain.sh
+ -doc
+ - -libguac-terminal
+ - - -Doxyfile.in
+ - - -Doxyfile
+ - -libguac
+ - - -Doxyfile.in
+ - - -Doxyfile
+ -m4
+ - -ltsugar.m4
+ - -lt~obsolete.m4
+ - -libtool.m4
+ - -ltoptions.m4
+ - -ltversion.m4
+ -src
+ - -common-ssh
+ - - -common-ssh
+ - - -tests
+ - - -Makefile.am
+ - - -buffer.c
+ - - -key.c
+ - - -sftp.c
+ - - -ssh.c
+ - - -user.c
+ - - -Makefile.in
+ - - -libguac_common_ssh_la-buffer.o
+ - - -libguac_common_ssh_la-buffer.lo
+ - - -libguac_common_ssh_la-sftp.o
+ - - -libguac_common_ssh_la-sftp.lo
+ - - -libguac_common_ssh_la-ssh.o
+ - - -libguac_common_ssh_la-ssh.lo
+ - - -libguac_common_ssh_la-key.o
+ - - -libguac_common_ssh_la-key.lo
+ - - -libguac_common_ssh_la-user.o
+ - - -libguac_common_ssh_la-user.lo
+ - - -libguac_common_ssh.la
+ - - -Makefile
+ - -common
+ - - -common
+ - - -tests
+ - - -Makefile.am
+ - - -blank_cursor.c
+ - - -clipboard.c
+ - - -cursor.c
+ - - -display.c
+ - - -dot_cursor.c
+ - - -ibar_cursor.c
+ - - -iconv.c
+ - - -io.c
+ - - -json.c
+ - - -list.c
+ - - -pointer_cursor.c
+ - - -rect.c
+ - - -string.c
+ - - -surface.c
+ - - -Makefile.in
+ - - -libguac_common_la-io.o
+ - - -libguac_common_la-io.lo
+ - - -libguac_common_la-blank_cursor.o
+ - - -libguac_common_la-blank_cursor.lo
+ - - -libguac_common_la-clipboard.o
+ - - -libguac_common_la-clipboard.lo
+ - - -libguac_common_la-cursor.o
+ - - -libguac_common_la-cursor.lo
+ - - -libguac_common_la-display.o
+ - - -libguac_common_la-display.lo
+ - - -libguac_common_la-dot_cursor.o
+ - - -libguac_common_la-dot_cursor.lo
+ - - -libguac_common_la-ibar_cursor.o
+ - - -libguac_common_la-ibar_cursor.lo
+ - - -libguac_common_la-iconv.o
+ - - -libguac_common_la-iconv.lo
+ - - -libguac_common_la-json.o
+ - - -libguac_common_la-json.lo
+ - - -libguac_common_la-list.o
+ - - -libguac_common_la-list.lo
+ - - -libguac_common_la-pointer_cursor.o
+ - - -libguac_common_la-pointer_cursor.lo
+ - - -libguac_common_la-rect.o
+ - - -libguac_common_la-rect.lo
+ - - -libguac_common_la-string.o
+ - - -libguac_common_la-string.lo
+ - - -libguac_common_la-surface.o
+ - - -libguac_common_la-surface.lo
+ - - -libguac_common.la
+ - - -Makefile
+ - -guacd-docker
+ - - -bin
+ - - -README.md
+ - -guacd
+ - - -init.d
+ - - -man
+ - - -systemd
+ - - -Makefile.am
+ - - -conf-args.c
+ - - -conf-args.h
+ - - -conf-file.c
+ - - -conf-file.h
+ - - -conf-parse.c
+ - - -conf-parse.h
+ - - -conf.h
+ - - -connection.c
+ - - -connection.h
+ - - -daemon.c
+ - - -log.c
+ - - -log.h
+ - - -move-fd.c
+ - - -move-fd.h
+ - - -proc-map.c
+ - - -proc-map.h
+ - - -proc.c
+ - - -proc.h
+ - - -Makefile.in
+ - - -guacd-conf-args.o
+ - - -guacd-conf-file.o
+ - - -guacd-conf-parse.o
+ - - -guacd-connection.o
+ - - -guacd-daemon.o
+ - - -guacd-log.o
+ - - -guacd-move-fd.o
+ - - -guacd-proc.o
+ - - -guacd-proc-map.o
+ - - -guacd
+ - - -Makefile
+ - -guacenc
+ - - -man
+ - - -Makefile.am
+ - - -buffer.c
+ - - -buffer.h
+ - - -cursor.c
+ - - -cursor.h
+ - - -display-buffers.c
+ - - -display-flatten.c
+ - - -display-image-streams.c
+ - - -display-layers.c
+ - - -display-sync.c
+ - - -display.c
+ - - -display.h
+ - - -encode.c
+ - - -encode.h
+ - - -ffmpeg-compat.c
+ - - -ffmpeg-compat.h
+ - - -guacenc.c
+ - - -guacenc.h
+ - - -image-stream.c
+ - - -image-stream.h
+ - - -instruction-blob.c
+ - - -instruction-cfill.c
+ - - -instruction-copy.c
+ - - -instruction-cursor.c
+ - - -instruction-dispose.c
+ - - -instruction-end.c
+ - - -instruction-img.c
+ - - -instruction-mouse.c
+ - - -instruction-move.c
+ - - -instruction-rect.c
+ - - -instruction-shade.c
+ - - -instruction-size.c
+ - - -instruction-sync.c
+ - - -instruction-transfer.c
+ - - -instructions.c
+ - - -instructions.h
+ - - -jpeg.c
+ - - -jpeg.h
+ - - -layer.c
+ - - -layer.h
+ - - -log.c
+ - - -log.h
+ - - -parse.c
+ - - -parse.h
+ - - -png.c
+ - - -png.h
+ - - -video.c
+ - - -video.h
+ - - -webp.c
+ - - -webp.h
+ - - -Makefile.in
+ - - -Makefile
+ - -guaclog
+ - - -man
+ - - -Makefile.am
+ - - -guaclog.c
+ - - -guaclog.h
+ - - -instruction-key.c
+ - - -instructions.c
+ - - -instructions.h
+ - - -interpret.c
+ - - -interpret.h
+ - - -keydef.c
+ - - -keydef.h
+ - - -log.c
+ - - -log.h
+ - - -state.c
+ - - -state.h
+ - - -Makefile.in
+ - - -guaclog-guaclog.o
+ - - -guaclog-instructions.o
+ - - -guaclog-instruction-key.o
+ - - -guaclog-interpret.o
+ - - -guaclog-keydef.o
+ - - -guaclog-log.o
+ - - -guaclog-state.o
+ - - -guaclog
+ - - -Makefile
+ - -libguac
+ - - -guacamole
+ - - -tests
+ - - -Makefile.am
+ - - -argv.c
+ - - -audio.c
+ - - -client.c
+ - - -encode-jpeg.c
+ - - -encode-jpeg.h
+ - - -encode-png.c
+ - - -encode-png.h
+ - - -encode-webp.c
+ - - -encode-webp.h
+ - - -error.c
+ - - -fips.c
+ - - -hash.c
+ - - -id.c
+ - - -id.h
+ - - -palette.c
+ - - -palette.h
+ - - -parser.c
+ - - -pool.c
+ - - -protocol.c
+ - - -raw_encoder.c
+ - - -raw_encoder.h
+ - - -recording.c
+ - - -socket-broadcast.c
+ - - -socket-fd.c
+ - - -socket-nest.c
+ - - -socket-ssl.c
+ - - -socket-tee.c
+ - - -socket-wsa.c
+ - - -socket.c
+ - - -string.c
+ - - -timestamp.c
+ - - -unicode.c
+ - - -user-handlers.c
+ - - -user-handlers.h
+ - - -user-handshake.c
+ - - -user.c
+ - - -wait-fd.c
+ - - -wait-fd.h
+ - - -wol.c
+ - - -Makefile.in
+ - - -libguac_la-argv.o
+ - - -libguac_la-argv.lo
+ - - -libguac_la-audio.o
+ - - -libguac_la-audio.lo
+ - - -libguac_la-client.o
+ - - -libguac_la-client.lo
+ - - -libguac_la-encode-jpeg.o
+ - - -libguac_la-encode-jpeg.lo
+ - - -libguac_la-encode-png.o
+ - - -libguac_la-encode-png.lo
+ - - -libguac_la-error.o
+ - - -libguac_la-error.lo
+ - - -libguac_la-fips.o
+ - - -libguac_la-fips.lo
+ - - -libguac_la-hash.o
+ - - -libguac_la-hash.lo
+ - - -libguac_la-id.o
+ - - -libguac_la-id.lo
+ - - -libguac_la-palette.o
+ - - -libguac_la-palette.lo
+ - - -libguac_la-parser.o
+ - - -libguac_la-parser.lo
+ - - -libguac_la-pool.o
+ - - -libguac_la-pool.lo
+ - - -libguac_la-protocol.o
+ - - -libguac_la-protocol.lo
+ - - -libguac_la-raw_encoder.o
+ - - -libguac_la-raw_encoder.lo
+ - - -libguac_la-recording.o
+ - - -libguac_la-recording.lo
+ - - -libguac_la-socket.o
+ - - -libguac_la-socket.lo
+ - - -libguac_la-socket-broadcast.o
+ - - -libguac_la-socket-broadcast.lo
+ - - -libguac_la-socket-fd.o
+ - - -libguac_la-socket-fd.lo
+ - - -libguac_la-socket-nest.o
+ - - -libguac_la-socket-nest.lo
+ - - -libguac_la-socket-tee.o
+ - - -libguac_la-socket-tee.lo
+ - - -libguac_la-string.o
+ - - -libguac_la-string.lo
+ - - -libguac_la-timestamp.o
+ - - -libguac_la-timestamp.lo
+ - - -libguac_la-unicode.o
+ - - -libguac_la-unicode.lo
+ - - -libguac_la-user.o
+ - - -libguac_la-user.lo
+ - - -libguac_la-user-handlers.o
+ - - -libguac_la-user-handlers.lo
+ - - -libguac_la-user-handshake.o
+ - - -libguac_la-user-handshake.lo
+ - - -libguac_la-wait-fd.o
+ - - -libguac_la-wait-fd.lo
+ - - -libguac_la-wol.o
+ - - -libguac_la-wol.lo
+ - - -libguac_la-encode-webp.o
+ - - -libguac_la-encode-webp.lo
+ - - -libguac_la-socket-ssl.o
+ - - -libguac_la-socket-ssl.lo
+ - - -libguac.la
+ - - -Makefile
+ - -protocols
+ - - -kubernetes
+ - - -rdp
+ - - -ssh
+ - - -telnet
+ - - -vnc
+ - -pulse
+ - - -pulse
+ - - -Makefile.am
+ - - -pulse.c
+ - - -Makefile.in
+ - - -libguac_pulse_la-pulse.o
+ - - -libguac_pulse_la-pulse.lo
+ - - -libguac_pulse.la
+ - - -Makefile
+ - -terminal
+ - - -terminal
+ - - -Makefile.am
+ - - -buffer.c
+ - - -char-mappings.c
+ - - -color-scheme.c
+ - - -common.c
+ - - -display.c
+ - - -named-colors.c
+ - - -palette.c
+ - - -scrollbar.c
+ - - -select.c
+ - - -terminal-handlers.c
+ - - -terminal-stdin-stream.c
+ - - -terminal.c
+ - - -typescript.c
+ - - -xparsecolor.c
+ - - -Makefile.in
+ - - -libguac_terminal_la-buffer.o
+ - - -libguac_terminal_la-buffer.lo
+ - - -libguac_terminal_la-char-mappings.o
+ - - -libguac_terminal_la-char-mappings.lo
+ - - -libguac_terminal_la-color-scheme.o
+ - - -libguac_terminal_la-color-scheme.lo
+ - - -libguac_terminal_la-common.o
+ - - -libguac_terminal_la-common.lo
+ - - -libguac_terminal_la-display.o
+ - - -libguac_terminal_la-display.lo
+ - - -libguac_terminal_la-named-colors.o
+ - - -libguac_terminal_la-named-colors.lo
+ - - -libguac_terminal_la-palette.o
+ - - -libguac_terminal_la-palette.lo
+ - - -libguac_terminal_la-scrollbar.o
+ - - -libguac_terminal_la-scrollbar.lo
+ - - -libguac_terminal_la-select.o
+ - - -libguac_terminal_la-select.lo
+ - - -libguac_terminal_la-terminal.o
+ - - -libguac_terminal_la-terminal.lo
+ - - -libguac_terminal_la-terminal-handlers.o
+ - - -libguac_terminal_la-terminal-handlers.lo
+ - - -libguac_terminal_la-terminal-stdin-stream.o
+ - - -libguac_terminal_la-terminal-stdin-stream.lo
+ - - -libguac_terminal_la-typescript.o
+ - - -libguac_terminal_la-typescript.lo
+ - - -libguac_terminal_la-xparsecolor.o
+ - - -libguac_terminal_la-xparsecolor.lo
+ - - -libguac-terminal.la
+ - - -Makefile
+ -util
+ - -generate-test-runner.pl
+ -guacamole-bare-metal-proxy
+ - -configs
+ - - -guacamole
+ - - -nginx
+ - - -systemd
+ - -docs
+ - - -installation-guide.md
+ - - -troubleshooting.md
+ - -scripts
+ - - -backup.sh
+ - - -install.sh
+ - - -rollback.sh
+ - -LICENSE
+ - -README.md
+ -autom4te.cache
+ - -requests
+ - -traces.0
+ - -output.0
+ - -traces.2
+ - -output.2
+ - -traces.1
+ - -output.1
+ -CONTRIBUTING
+ -Dockerfile
+ -LICENSE
+ -Makefile.am
+ -NOTICE
+ -README
+ -configure.ac
+ -aclocal.m4
+ -configure
+ -config.h.in
+ -Makefile.in
+ -config.log
+ -config.status
+ -config.h
+ -stamp-h1
+ -CLAUDE.md
+ -Makefile
+ -libtool
+ -gitingest.txt
